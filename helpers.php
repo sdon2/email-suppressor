@@ -98,6 +98,6 @@ function csrf_token(): ?string
  */
 function view(string $view, mixed $data = null): View
 {
-    $blade = new Blade('views', 'cache');
+    $blade = new Blade(__DIR__ . '/views', __DIR__ . '/cache');
     return $blade->make($view, $data);
 }

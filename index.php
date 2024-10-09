@@ -18,5 +18,9 @@ require_once(__DIR__ . "/routes.php");
 
 //SimpleRouter::setDefaultNamespace('\Demo\Controllers');
 
-// Start the routing
-SimpleRouter::start();
+try {
+    // Start the routing
+    SimpleRouter::start();
+} catch (Exception $ex) {
+    return $ex->getTraceAsString();
+}

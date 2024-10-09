@@ -1,10 +1,10 @@
 {
-    "name": "saravana/email-supressor",
+    "name": "saravana/email-suppressor",
     "description": "Email Suppressor for MailEmpower",
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Saravana\\EmailSupressor\\": "src/"
+            "Saravana\\EmailSuppressor\\": "src/"
         }
     },
     "authors": [
@@ -15,6 +15,7 @@
     ],
     "require": {
         "jenssegers/blade": "^2.0",
-        "pecee/simple-router": "^5.4"
+        "pecee/simple-router": "^5.4",
+        "illuminate/view": "11.7.0"
     }
 }

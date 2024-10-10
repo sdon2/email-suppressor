@@ -1,0 +1,12 @@
+{
+  "name": "emailsuppressor",
+  "version": "1.0.0",
+  "description": "****EMAIL SUPPRESSOR FOR EMPOWERMAIL****",
+  "main": "index.js",
+  "scripts": {
+    "install": "composer install",
+    "serve": "php -S localhost:8000 -t ."
+  },
+  "author": "Saravanakumar Arumugam <Saravanakumar.a.o@gmail.com>",
+  "license": "ISC"
+}

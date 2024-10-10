@@ -4,6 +4,7 @@ namespace Saravana\EmailSuppressor\Controllers;
 
 use Illuminate\Database\Capsule\Manager;
 use Saravana\EmailSuppressor\Business\IdSuppressor;
+use Saravana\EmailSuppressor\Business\UnsubscribedSuppressor;
 
 class HomeController
 {
@@ -11,17 +12,14 @@ class HomeController
     {
         $total = Manager::table('data')->count();
 
-        $id_file = fopen(DIR . "/data/316suppression.txt", "r");
+        $suppressions = [];
 
-        $supressions['id'] = ['count' => 0, 'suppressed' => 0];
+        $suppressors = [IdSuppressor::class, UnsubscribedSuppressor::class];
 
-        while ($line = trim(fgets($id_file))) {
-            $supressions['id']['count']++;
-            if (IdSuppressor::suppress($line)) {
-                $supressions['id']['suppressed']++;
-            }
+        foreach ($suppressors as $suppressor) {
+            $suppressions[] = call_user_func([$suppressor, 'process']);
         }
 
-        return view('home', ['total' => $total, 'suppressions' => $supressions])->render();
+        return view('home', ['total' => $total, 'suppressions' => $suppressions])->render();
     }
 }

@@ -11,10 +11,13 @@
             <th>Suppressible Records</th>
             <th>Suppressed Count</th>
         </tr>
+
+        @foreach ($suppressions as $suppression)
         <tr>
-            <td>ID Suppressions</td>
-            <td>{{ $suppressions['id']['count'] }}</td>
-            <td>{{ $suppressions['id']['suppressed'] }}</td>
+            <td>{{ $suppression['name'] }}</td>
+            <td>{{ $suppression['count'] }}</td>
+            <td>{{ $suppression['suppressed'] }}</td>
         </tr>
+        @endforeach
     </table>
 @endsection

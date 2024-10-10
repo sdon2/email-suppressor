@@ -7,6 +7,8 @@ use Pecee\Http\Url;
 use Pecee\Http\Response;
 use Pecee\Http\Request;
 
+define('DIR', dirname(__FILE__));
+
 /**
  * Get url for a route by using either name/alias, class or method name.
  *

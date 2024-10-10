@@ -1,15 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+@section('title', 'Suppression Stats')
 
-<body>
-    Hi, {{ $name }}
-</body>
-
-</html>
+@section('content')
+    <h4>Total Records in Database: {{ $total }}</h4>
+    <table class="table table-bordered table-striped">
+        <legend>Supressed Email Statistics</legend>
+        <tr>
+            <th>Suppression Type</th>
+            <th>Suppressible Records</th>
+            <th>Suppressed Count</th>
+        </tr>
+        <tr>
+            <td>ID Suppressions</td>
+            <td>{{ $suppressions['id']['count'] }}</td>
+            <td>{{ $suppressions['id']['suppressed'] }}</td>
+        </tr>
+    </table>
+@endsection

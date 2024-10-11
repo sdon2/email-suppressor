@@ -4,6 +4,7 @@ namespace Saravana\EmailSuppressor\Controllers;
 
 use Illuminate\Database\Capsule\Manager;
 use Saravana\EmailSuppressor\Business\BadMailSuppressor;
+use Saravana\EmailSuppressor\Business\FBLSuppressor;
 use Saravana\EmailSuppressor\Business\IdSuppressor;
 use Saravana\EmailSuppressor\Business\OptOutSuppressor;
 use Saravana\EmailSuppressor\Business\UnsubscribedSuppressor;
@@ -16,7 +17,13 @@ class HomeController
 
         $suppressions = [];
 
-        $suppressors = [IdSuppressor::class, UnsubscribedSuppressor::class, OptOutSuppressor::class, BadMailSuppressor::class];
+        $suppressors = [
+            IdSuppressor::class,
+            UnsubscribedSuppressor::class,
+            OptOutSuppressor::class,
+            BadMailSuppressor::class,
+            FBLSuppressor::class,
+        ];
         
         foreach ($suppressors as $suppressor) {            
             if ($suppressor === BadMailSuppressor::class) {

@@ -1,6 +1,9 @@
 <?php
 
-use Pecee\SimpleRouter\SimpleRouter;
+use Phroute\Phroute\RouteCollector;
+
+$router = new RouteCollector();
+
 use Saravana\EmailSuppressor\Controllers\HomeController;
 
-SimpleRouter::get('/', [HomeController::class, 'index']);
+$router->get('/', [HomeController::class, 'index']);

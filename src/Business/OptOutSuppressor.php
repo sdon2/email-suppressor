@@ -4,16 +4,16 @@ namespace Saravana\EmailSuppressor\Business;
 
 use Illuminate\Database\Capsule\Manager;
 
-class IdSuppressor extends Suppressor
+class OptOutSuppressor extends Suppressor
 {
-    public function getName(): string
-    {
-        return 'ID Suppressor';
+    public function getName(): string {
+        return 'Opt Out Suppressor';
     }
 
     public function process(): array {
-        $file = fopen(DIR . "/data/316suppression.txt", "r+");
-        
+
+        $file = fopen(DIR . "/data/optout.txt", "r+");
+
         while ($line = trim(fgets($file))) {
             if ($this->suppress($line)) {
                 static::$suppressedCount++;
@@ -27,8 +27,11 @@ class IdSuppressor extends Suppressor
     {
         static::$count++;
 
+        list($emid, $offerid) = explode('|', $data);
+        
         return Manager::table('data')
-            ->whereRaw('MD5(email) = ?', [$data])
+            ->where('emid', $emid)
             ->exists();
     }
+    
 }

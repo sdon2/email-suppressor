@@ -1,9 +1,10 @@
 <?php
 
 // Init psr-4 autoloading
-require_once(__DIR__ . "/vendor/autoload.php");
 
-use Pecee\SimpleRouter\SimpleRouter;
+use Illuminate\View\ViewException;
+
+require_once(__DIR__ . "/vendor/autoload.php");
 
 // Load external routes file
 require_once(__DIR__ . "/helpers.php");
@@ -14,16 +15,10 @@ require_once(__DIR__ . "/routes.php");
 // Init Database
 require_once(__DIR__ . "/database.php");
 
-/**
- * The default namespace for route-callbacks, so we don't have to specify it each time.
- * Can be overwritten by using the namespace config option on your routes.
- */
-
-//SimpleRouter::setDefaultNamespace('\Demo\Controllers');
-
 try {
-    // Start the routing
-    SimpleRouter::start();
+    $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
+    $response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+    echo $response;
 } catch (Exception $ex) {
-    return $ex->getTraceAsString();
+    throw $ex;
 }

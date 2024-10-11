@@ -15,9 +15,9 @@
     ],
     "require": {
         "jenssegers/blade": "^2.0",
-        "pecee/simple-router": "^5.4",
         "illuminate/view": "11.7.0",
         "illuminate/database": "11.7.0",
-        "larapack/dd": "^1.1"
+        "larapack/dd": "^1.1",
+        "phroute/phroute": "^2.2"
     }
 }

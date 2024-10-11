@@ -4,6 +4,7 @@ namespace Saravana\EmailSuppressor\Controllers;
 
 use Illuminate\Database\Capsule\Manager;
 use Saravana\EmailSuppressor\Business\IdSuppressor;
+use Saravana\EmailSuppressor\Business\OptOutSuppressor;
 use Saravana\EmailSuppressor\Business\UnsubscribedSuppressor;
 
 class HomeController
@@ -14,10 +15,11 @@ class HomeController
 
         $suppressions = [];
 
-        $suppressors = [IdSuppressor::class, UnsubscribedSuppressor::class];
+        $suppressors = [IdSuppressor::class, UnsubscribedSuppressor::class, OptOutSuppressor::class];
 
         foreach ($suppressors as $suppressor) {
-            $suppressions[] = call_user_func([$suppressor, 'process']);
+            $class = new $suppressor();
+            $suppressions[] = call_user_func([$class, 'process']);
         }
 
         return view('home', ['total' => $total, 'suppressions' => $suppressions])->render();

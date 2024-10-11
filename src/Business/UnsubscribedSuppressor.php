@@ -4,49 +4,33 @@ namespace Saravana\EmailSuppressor\Business;
 
 use Illuminate\Database\Capsule\Manager;
 
-class UnsubscribedSuppressor implements ISuppressor
+class UnsubscribedSuppressor extends Suppressor
 {
-    private static $count = 0;
-    private static $suppressedCount = 0;
-
-    public static function getCount(): int {
-        return self::$count;
-    }
-
-    public static function process(): array {
-        $file = fopen(DIR . "/data/unsubscribe.txt", "r+");
-
-        while ($line = trim(fgets($file))) {
-            if (self::suppress($line)) {
-                self::$suppressedCount++;
-            }
-        }
-
-        return [
-            'name' => self::getName(),
-            'count' => self::$count,
-            'suppressed' => self::$suppressedCount
-        ];
-    }
-
-    public static function getName(): string
+    public function getName(): string
     {
         return 'Unsubscribed Suppressor';
     }
+    
+    public function process(): array {
+        $file = fopen(DIR . "/data/unsubscribe.txt", "r+");
 
-    public static function getSuppressedCount(): int
-    {
-        return self::$suppressedCount;
+        while ($line = trim(fgets($file))) {
+            if ($this->suppress($line)) {
+                static::$suppressedCount++;
+            }
+        }
+
+        return $this->getResult();
     }
 
-    public static function suppress(string $data): bool
+    public function suppress(string $data): bool
     {
-        self::$count++;
+        static::$count++;
 
         list($emid, $offerid) = explode('|', $data);
 
         return Manager::table('data')
-            ->whereRaw('emid = ?', [$emid])
+            ->where('emid', $emid)
             ->exists();
     }
 }

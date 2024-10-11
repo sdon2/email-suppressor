@@ -4,8 +4,8 @@ namespace Saravana\EmailSuppressor\Business;
 
 interface ISuppressor
 {
-    public static function getName(): string;
-    public static function getCount(): int;
-    public static function getSuppressedCount(): int;
-    public static function process(): array;
+    public function getName(): string;
+    public function getCount(): int;
+    public function getSuppressedCount(): int;
+    public function process(): array;
 }

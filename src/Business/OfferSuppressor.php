@@ -4,11 +4,11 @@ namespace Saravana\EmailSuppressor\Business;
 
 use Illuminate\Database\Capsule\Manager;
 
-class IdSuppressor extends Suppressor
+class OfferSuppressor extends Suppressor
 {
     public function getName(): string
     {
-        return 'ID Suppressor';
+        return 'Offer Suppressor';
     }
 
     public function process(): array

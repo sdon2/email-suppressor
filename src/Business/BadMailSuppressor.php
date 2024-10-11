@@ -20,6 +20,7 @@ class BadMailSuppressor extends Suppressor
         return 'Bad Mail Suppressor: ' . $this->filename;
     }
 
+
     public function process(): array
     {
         $file = fopen(DIR . "/data/" . $this->filename . ".txt", "r+");

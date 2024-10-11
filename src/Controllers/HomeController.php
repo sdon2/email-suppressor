@@ -17,7 +17,6 @@ class HomeController
         $suppressions = [];
 
         $suppressors = [IdSuppressor::class, UnsubscribedSuppressor::class, OptOutSuppressor::class, BadMailSuppressor::class];
-
         
         foreach ($suppressors as $suppressor) {            
             if ($suppressor === BadMailSuppressor::class) {

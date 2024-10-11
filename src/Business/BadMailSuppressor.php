@@ -4,17 +4,25 @@ namespace Saravana\EmailSuppressor\Business;
 
 use Illuminate\Database\Capsule\Manager;
 
-class OptOutSuppressor extends Suppressor
+class BadMailSuppressor extends Suppressor
 {
+    private string $filename;
+
+    public function __construct(string $filename)
+    {
+        $this->filename = $filename;
+
+        parent::__construct();
+    }
+
     public function getName(): string
     {
-        return 'Opt Out Suppressor';
+        return 'Bad Mail Suppressor: ' . $this->filename;
     }
 
     public function process(): array
     {
-
-        $file = fopen(DIR . "/data/optout.txt", "r+");
+        $file = fopen(DIR . "/data/" . $this->filename . ".txt", "r+");
 
         while ($line = trim(fgets($file))) {
             if ($this->suppress($line)) {
@@ -29,10 +37,8 @@ class OptOutSuppressor extends Suppressor
     {
         static::$count++;
 
-        list($emid, $offerid) = explode('|', $data);
-
         return Manager::table('data')
-            ->where('emid', $emid)
+            ->where('email', $data)
             ->exists();
     }
 }

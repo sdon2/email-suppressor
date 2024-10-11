@@ -11,9 +11,10 @@ class IdSuppressor extends Suppressor
         return 'ID Suppressor';
     }
 
-    public function process(): array {
+    public function process(): array
+    {
         $file = fopen(DIR . "/data/316suppression.txt", "r+");
-        
+
         while ($line = trim(fgets($file))) {
             if ($this->suppress($line)) {
                 static::$suppressedCount++;

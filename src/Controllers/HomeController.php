@@ -3,6 +3,7 @@
 namespace Saravana\EmailSuppressor\Controllers;
 
 use Illuminate\Database\Capsule\Manager;
+use Saravana\EmailSuppressor\Business\BadMailSuppressor;
 use Saravana\EmailSuppressor\Business\IdSuppressor;
 use Saravana\EmailSuppressor\Business\OptOutSuppressor;
 use Saravana\EmailSuppressor\Business\UnsubscribedSuppressor;
@@ -15,11 +16,21 @@ class HomeController
 
         $suppressions = [];
 
-        $suppressors = [IdSuppressor::class, UnsubscribedSuppressor::class, OptOutSuppressor::class];
+        $suppressors = [IdSuppressor::class, UnsubscribedSuppressor::class, OptOutSuppressor::class, BadMailSuppressor::class];
 
-        foreach ($suppressors as $suppressor) {
-            $class = new $suppressor();
-            $suppressions[] = call_user_func([$class, 'process']);
+        
+        foreach ($suppressors as $suppressor) {            
+            if ($suppressor === BadMailSuppressor::class) {
+                $badmail_files = ["yabadmail", "yaespbadmail", "complaints"];
+                foreach ($badmail_files as &$file) {
+                    $class = new $suppressor($file);
+                    $suppressions[] = call_user_func([$class, 'process']);
+                }
+            }
+            else {
+                $class = new $suppressor();
+                $suppressions[] = call_user_func([$class, 'process']);
+            }
         }
 
         return view('home', ['total' => $total, 'suppressions' => $suppressions])->render();

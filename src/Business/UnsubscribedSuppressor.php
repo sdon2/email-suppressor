@@ -10,8 +10,9 @@ class UnsubscribedSuppressor extends Suppressor
     {
         return 'Unsubscribed Suppressor';
     }
-    
-    public function process(): array {
+
+    public function process(): array
+    {
         $file = fopen(DIR . "/data/unsubscribe.txt", "r+");
 
         while ($line = trim(fgets($file))) {

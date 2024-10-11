@@ -7,5 +7,5 @@
 
 **INSTALLATION**
 1. Clone or download code
-2. Install dependencies using command `composer install`
-3. Run Using command `php -S localhost:8000 -t .`
+2. Install dependencies using command `npm run install`
+3. Run Using command `npm run serve`

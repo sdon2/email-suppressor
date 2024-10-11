@@ -7,10 +7,10 @@ use Illuminate\View\ViewException;
 require_once(__DIR__ . "/vendor/autoload.php");
 
 // Load external routes file
-require_once(__DIR__ . "/helpers.php");
+require_once(__DIR__ . "/routes.php");
 
 // Load external routes file
-require_once(__DIR__ . "/routes.php");
+require_once(__DIR__ . "/helpers.php");
 
 // Init Database
 require_once(__DIR__ . "/database.php");

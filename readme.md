@@ -1,4 +1,4 @@
-**[EMAIL SUPPRESSOR FOR EMPOWERMAIL]{.underline}**
+**<p style="text-align:center;"><ins>EMAIL SUPPRESSOR FOR EMPOWERMAIL</ins></p>**
 
 This project is developed as a email suppressing tool which has to be
 used in the mail campaigning tool **"EmpowerMail"**.
